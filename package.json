@@ -1,0 +1,39 @@
+{
+  "name": "watson-nlc-test",
+  "version": "0.0.1",
+  "description": "This is an example of IBM Watson Natural Language Classifier.",
+  "author": {
+    "name": "Diego Herrera",
+    "email": "vermicida@gmail.com"
+  },
+  "homepage": "https://github.com/vermicida/watson-nlc-test#readme",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vermicida/watson-nlc-test.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vermicida/watson-nlc-test/issues"
+  },
+  "scripts": {
+    "dev": "nodemon ./server/main.js"
+  },
+  "keywords": [
+    "ibm",
+    "watson",
+    "nlp",
+    "classifier",
+    "sentiment",
+    "intent"
+  ],
+  "dependencies": {
+    "colour": "^0.7.1",
+    "dateformat": "^1.0.12",
+    "express": "^4.13.4",
+    "q": "^1.4.1",
+    "watson-developer-cloud": "^1.8.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.9.2"
+  }
+}

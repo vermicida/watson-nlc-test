@@ -1,0 +1,13 @@
+{
+  "server": {
+    "host": "localhost",
+    "port": 8080
+  },
+  "watson": {
+    "nlc": {
+      "username": "your-watson-nlc-username",
+      "password": "your-watson-nlc-password",
+      "classifierId": "your-watson-nlc-classifier-id"
+    }
+  }
+}
