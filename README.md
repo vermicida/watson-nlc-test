@@ -79,7 +79,7 @@ If you change the app server's host or port in the `config.json` file, remember 
 
 ## Running
 
-You're only one step to chat with your bot. Just run the NPM `dev` script in the root directory:
+You're only one step to classify your questions. Just run the NPM `dev` script in the root directory:
 ```bash
 $ npm run dev
 ```
