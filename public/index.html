@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IBM Watson Natural Language Classifier</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+    <style>
+        header, table { margin-top: 40px; margin-bottom: 40px; }
+        header { text-align: center; }
+        ul { list-style: none; }
+    </style>
+</head>
+<body ng-app="watson-nlc-text">
+
+    <!-- The root component -->
+    <root></root>
+
+    <!-- AngularJS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+
+    <!-- Module -->
+    <script>
+
+        angular
+
+            // Module setter.
+            .module("watson-nlc-text", [])
+
+            // The API URI value.
+            .value("apiUri", "http://localhost:8080/")
+
+            // A service to provide communitacion with the backend.
+            .service("$backend", function($http, apiUri) {
+
+                // Classify the given text.
+                this.classify = function(text) {
+                    return $http.get(apiUri + "classify", { params: { text: text } });
+                };
+            })
+
+            // The root component definition.
+            .component("root", {
+                templateUrl: "views/root.html",
+                controller: function($http, $backend) {
+
+                    var self = this;
+
+                    // Initialize the component data.
+                    self.$onInit = function() {
+                        self.data = [];
+                    };
+
+                    // Ask the backend for the classification of the text written by the user.
+                    self.onTextInputKeyUp = function(e) {
+                        if ((e.which || e.keyCode) === 13 && self.inputText !== "") {
+                            $backend
+                                .classify(self.inputText)
+                                .then(function(response) {
+                                    self.data.push(response.data);
+                                    self.inputText = "";
+                                });
+                        }
+                    };
+
+                    // Check if exists any pending HTTP request.
+                    self.isLoading = function() {
+                        return $http.pendingRequests.length > 0;
+                    };
+                }
+            });
+
+    </script>
+
+    <!-- The 'root' component template -->
+    <script type="text/ng-template" id="views/root.html">
+        <div class="container">
+            <!-- Header -->
+            <div class="row">
+                <div class="twelve columns">
+                    <header>
+                        <h2>Natural Language Classifier</h2>
+                        <p>IBM Watson</p>
+                    </header>
+                </div>
+            </div>
+            <!-- Input Text -->
+            <div class="row">
+                <div class="twelve columns">
+                    <div>
+                        <input type="text"
+                               class="u-full-width"
+                               placeholder="Escribe el texto a clasificar y pulsa intro"
+                               autofocus
+                               ng-model="$ctrl.inputText"
+                               ng-keyup="$ctrl.onTextInputKeyUp($event)"
+                               ng-disabled="$ctrl.isLoading()" />
+                    </div>
+                </div>
+            </div>
+            <!-- Result Table -->
+            <div class="row" ng-show="$ctrl.data.length > 0">
+                <div class="twelve columns">
+                    <table class="u-full-width">
+                        <thead>
+                            <tr>
+                                <th>Text</th>
+                                <th>Classification</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="classification in $ctrl.data | orderBy:'-' track by $index">
+                                <td>{{ classification.text }}</td>
+                                <td>
+                                    <ul>
+                                        <li ng-repeat="class in classification.classes track by $index">
+                                            <code>{{ class.class_name }}</code>
+                                            <code>{{ class.confidence }}</code>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </script>
+
+</body>
+</html>

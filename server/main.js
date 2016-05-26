@@ -24,13 +24,19 @@ const classifier = nlc(
 // Create the Express application.
 const app = express();
 
-// Set the webapp directory as static.
+// Set the public directory as static.
 app.use(express.static("public"));
 
+// The text classification endpoint.
 app.get("/classify", (req, res, next) => {
 
+    // Try to classify the given text.
     classifier.classify(req.query.text).then(
+
+        // Send the response to the client.
         (data) => { res.send(data); },
+
+        // In case of error.
         (err) => { return next(err); }
     );
 });
