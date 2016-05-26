@@ -72,6 +72,11 @@ You can set the app server's host and port if you want. Do it this way:
 }
 ```
 
+If you change the app server's host or port in the `config.json` document, remember to change them too in the webapp. Go to the `public/index.html` document and locate an AngularJS value called `apiUri`; then, change the URI to the server:
+```javascript
+.value("apiUri", "http://localhost:9000/")
+```
+
 ## Running
 
 You're only one step to chat with your bot. Just run the NPM `dev` script in the root directory:
