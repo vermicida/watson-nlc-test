@@ -1,6 +1,6 @@
 # watson-nlc-test
 
-This is an example of IBM Watson Natural Language Classifier. This app can extract the intent of the questions you do to it. The training data for this example is just a few lines of financial-oriented (and in spanish) texts, so you must ask the app within this context.
+This is an example of IBM Watson Natural Language Classifier. This app can extract the intent of the questions you do to it. The training data for this example is just a few lines of _financial-oriented_ (and in spanish) texts, so you must ask the app within this context.
 
 These are the intents that we will train:
 - préstamo
