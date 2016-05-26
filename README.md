@@ -44,7 +44,7 @@ It's time to create and train your classifier. Go to the `classifier` directory 
 $ node classifier-create.js fin-train.csv MyFinancialClassifier es
 ```
 
-This script will use your credentials to create the classifier. If you mind, this traning data is a two columns `csv` document, in which the first coulmn is a natural language question and the second one is the corresponding intent. Feel free to add more question/intents or create a new `csv` document for your our tests.
+This script will use your credentials to create the classifier. This traning data is a two columns `csv` file, in which the first coulmn is a natural language question and the second one is the corresponding intent. Feel free to add more question/intents or create a new `csv` file for your our tests.
 
 The classifier creation outputs a **classifier_id**; don't forget to push it to the `config.json` file:
 ```json
@@ -57,7 +57,7 @@ The classifier creation outputs a **classifier_id**; don't forget to push it to 
 }
 ```
 
-Depending on the `csv` document size, the training may take a while. The given `csv` takes around 6 minutes to train. You can check the status of your classifier anytime using the script `classifier-status-js`:
+Depending on the `csv` file size, the training may take a while. The given `csv` takes around 6 minutes to train. You can check the status of your classifier anytime using the script `classifier-status-js`:
 ```bash
 $ node classifier-status.js
 ```
@@ -72,7 +72,7 @@ You can set the app server's host and port if you want. Do it this way:
 }
 ```
 
-If you change the app server's host or port in the `config.json` document, remember to change them too in the webapp. Go to the `public/index.html` document and locate an AngularJS value called `apiUri`; then, change the URI to the server:
+If you change the app server's host or port in the `config.json` file, remember to change them too in the webapp. Go to the `public/index.html` file and locate an AngularJS value called `apiUri`; then, change the URI to the server:
 ```javascript
 .value("apiUri", "http://localhost:9000/")
 ```
